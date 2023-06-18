@@ -1,0 +1,84 @@
+# Quartus Prime
+*.qpf
+*.qsf
+*.qsf.bak
+*.qws
+db/
+incremental_db/
+simulation/
+output_files/
+*.summary
+*.rpt
+*.smsg
+*.sof
+*.pof
+
+# ModelSim
+transcript
+modelsim.ini
+*.vstf
+*.wlf
+*.hex
+*.o
+*.obj
+*.dll
+*.exe
+*.mti
+*.a
+*.so
+*.sl
+*.ll
+*.ghw
+*.fdo
+work/
+
+# Ignore Quartus and ModelSim project files
+*.qpf
+*.qsf
+*.qws
+*.qws.bak
+*.qdb
+*.qdz
+*.qar
+*.qdbb
+*.qdz
+*.qpb
+*.qpi
+*.qxp
+*.qxp.bak
+*.qxp.journal
+*.mtb
+*.mtf
+
+# Ignore Quartus project output files
+db/
+incremental_db/
+output_files/
+simulation/
+
+# Ignore Quartus compilation reports
+*.summary
+*.rpt
+*.smsg
+
+# Ignore ModelSim simulation files
+transcript
+*.vstf
+*.wlf
+
+# Ignore Quartus and ModelSim generated files
+*.o
+*.obj
+*.dll
+*.exe
+*.mti
+*.a
+*.so
+*.sl
+*.ll
+*.ghw
+*.hex
+*.fdo
+
+# Ignore ModelSim work directory
+work/
