@@ -22,7 +22,7 @@ input ResetN;
 input Rx;
 input Tick;
 output RxReady;
-output [DATA_BITS:0] RxData;
+output [DATA_BITS-1:0] RxData;
 
 reg RxReady;
 // internal signals
@@ -61,7 +61,7 @@ end
 // next state logic
 always_comb begin
   NextState = CurrentState;
-  RXReady = 1'b0;
+  RxReady = 1'b0;
   NextTickCounter = TickCounter;
   NextDataCounter = DataCounter;
   NextDataBits = DataBits;
@@ -71,8 +71,6 @@ always_comb begin
                 NextState = START;
                 NextTickCounter = 0;
             end
-            else
-                NextState = IDLE;
         end
         START: begin
           if(Tick) begin
@@ -80,23 +78,22 @@ always_comb begin
                 NextState = DATA;
                 NextDataCounter = 0;
                 NextDataBits = 0;
-                end
-          end
+                end 
         end else begin
           NextTickCounter = TickCounter + 1;
-        end
+          end 
+        end 
         DATA: begin
           if(Tick) begin
             if (TickCounter == STOP_BIT_TICKS-1) begin
-              TickCounter = 0;
-              DataBits = {Rx, DataBits[7:1]};
+              NextTickCounter = 0;
+              NextDataBits = {Rx, DataBits[7:1]};
               if (DataCounter == DATA_BITS-1) begin
                 NextState = STOP;
               end else begin
                 NextDataCounter = DataCounter + 1;
-                NextState = DATA;
               end
-                end
+                end 
           end else begin
             NextTickCounter = TickCounter + 1;
           end
@@ -106,7 +103,7 @@ always_comb begin
             if (TickCounter == STOP_BIT_TICKS-1) begin
               NextState = IDLE;
               RxReady = 1'b1;
-            end
+            end 
           end else begin
             NextTickCounter = TickCounter + 1;
           end
@@ -139,46 +136,54 @@ always begin
   #10;
 end
 
+always begin
+  Tick = 1'b0;
+  #20;
+  Tick = 1'b1;
+  #20;
+end
+
 initial begin
   ResetN = 1'b0;
   Rx = 1'b1;
   Tick = 1'b0;
-  #10;
+  #200;
   ResetN = 1'b1;
-  #10;
+  #200;
   Rx = 1'b0;
-  #10;
+  Tick = 1'b1;
+  #200;
   Rx = 1'b1;
-  #10;
+  #200;
   Rx = 1'b0;
-  #10;
+  #200;
   Rx = 1'b1;
-  #10;
+  #200;
   Rx = 1'b0;
-  #10;
+  #200;
   Rx = 1'b1;
-  #10;
+  #200;
   Rx = 1'b0;
-  #10;
+  #200;
   Rx = 1'b1;
-  #10;
+  #200;
   Rx = 1'b0;
-  #10;
+  #200;
   Rx = 1'b1;
-  #10;
+  #200;
   Rx = 1'b0;
-  #10;
+  #200;
   Rx = 1'b1;
-  #10;
+  #200;
   Rx = 1'b0;
-  #10;
+  #200;
   Rx = 1'b1;
-  #10;
+  #200;
   $stop;
 end
 
 initial begin
-  $monitor("RxReady=%b RxData=%b", RxReady, RxData);
+  $monitor("RxReady=%b RxData=%b CurrentState=%d TickCounter=%d", RxReady, RxData, receiver.CurrentState, receiver.TickCounter);
 end
 
 endmodule
