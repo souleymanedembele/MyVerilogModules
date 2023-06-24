@@ -76,8 +76,8 @@ always_comb begin
           if(Tick) begin
             if (TickCounter == DATA_BITS-1) begin
                 NextState = DATA;
+                NextTickCounter = 0;
                 NextDataCounter = 0;
-                NextDataBits = 0;
                 end 
         end else begin
           NextTickCounter = TickCounter + 1;
@@ -108,9 +108,9 @@ always_comb begin
             NextTickCounter = TickCounter + 1;
           end
         end
-        default: begin
-            NextState = IDLE;
-        end
+        // default: begin
+        //     NextState = IDLE;
+        // end
     endcase
 end
 assign RxData = DataBits;
@@ -138,47 +138,54 @@ end
 
 always begin
   Tick = 1'b0;
-  #20;
+  #260;
   Tick = 1'b1;
   #20;
 end
 
 initial begin
   ResetN = 1'b0;
-  Rx = 1'b1;
-  Tick = 1'b0;
-  #200;
+  Rx = 1'b0;
+  #20;
   ResetN = 1'b1;
-  #200;
+  #20;
+  Rx = 1'b1;  
+  wait(RxData == 8'b10000000);
   Rx = 1'b0;
-  Tick = 1'b1;
-  #200;
+  wait(RxData == 8'b01000000);
   Rx = 1'b1;
-  #200;
+  wait(RxData == 8'b10100000);
   Rx = 1'b0;
-  #200;
+  wait(RxData == 8'b01010000);
   Rx = 1'b1;
-  #200;
+  wait(RxData == 8'b10101000);
   Rx = 1'b0;
-  #200;
+  wait(RxData == 8'b01010100);
   Rx = 1'b1;
-  #200;
+  wait(RxData == 8'b10101010);
   Rx = 1'b0;
-  #200;
+  wait(RxData == 8'b01010101);
   Rx = 1'b1;
-  #200;
+  wait(RxReady == 1'b1);
+  wait(RxReady == 1'b0);
   Rx = 1'b0;
-  #200;
-  Rx = 1'b1;
-  #200;
+  wait(RxData == 8'b01010101);
   Rx = 1'b0;
-  #200;
+  wait(RxData == 8'b00010101);
   Rx = 1'b1;
-  #200;
+  wait(RxData == 8'b10001010);
   Rx = 1'b0;
-  #200;
+  wait(RxData == 8'b01000101);
   Rx = 1'b1;
-  #200;
+  wait(RxData == 8'b10100010);
+  Rx = 1'b0;
+  wait(RxData == 8'b01010001);
+  Rx = 1'b1;
+  wait(RxData == 8'b10101000);
+  Rx = 1'b0;
+  wait(RxData == 8'b01010100);
+  wait(RxReady == 1'b1);
+  wait(RxReady == 1'b0);
   $stop;
 end
 
