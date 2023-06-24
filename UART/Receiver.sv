@@ -138,7 +138,7 @@ end
 
 always begin
   Tick = 1'b0;
-  #260;
+  #460;
   Tick = 1'b1;
   #20;
 end
