@@ -108,9 +108,9 @@ always_comb begin
             NextTickCounter = TickCounter + 1;
           end
         end
-        // default: begin
-        //     NextState = IDLE;
-        // end
+         default: begin
+             NextState = IDLE;
+         end
     endcase
 end
 assign RxData = DataBits;
