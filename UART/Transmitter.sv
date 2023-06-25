@@ -77,9 +77,12 @@ module Transmitter (
             NextState = DATA;
             NextTickCount = 0;
             NextDataCount = 0;
+          end else begin
+            NextTickCount = TickCount + 1;
+            NextState = START;
           end
         end else begin
-          NextTickCount = TickCount + 1;
+          NextState = START;
         end
       end
       DATA: begin
@@ -93,9 +96,12 @@ module Transmitter (
             end else begin
               NextDataCount = DataCount + 1;
             end
+          end else begin
+            NextTickCount = TickCount + 1;
+            NextState = DATA;
           end
         end else begin
-          NextTickCount = TickCount + 1;
+          NextState = DATA;
         end
       end
       STOP: begin
@@ -104,9 +110,12 @@ module Transmitter (
           if (TickCount == STOP_BIT_TICKS - 1) begin
             NextState = IDLE;
             TxReady   = 1;
+          end else begin
+            NextTickCount = TickCount + 1;
+            NextState = STOP;
           end
         end else begin
-          NextTickCount = TickCount + 1;
+          NextState = STOP;
         end
       end
       default: begin

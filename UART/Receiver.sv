@@ -80,9 +80,12 @@ always_comb begin
                 NextState = DATA;
                 NextTickCounter = 0;
                 NextDataCounter = 0;
-                end 
-        end else begin
+                end else begin
           NextTickCounter = TickCounter + 1;
+          NextState = START;
+          end 
+        end else begin
+          NextState = START;
           end 
         end 
         DATA: begin
@@ -94,10 +97,14 @@ always_comb begin
                 NextState = STOP;
               end else begin
                 NextDataCounter = DataCounter + 1;
+                NextState = DATA;
               end
-                end 
-          end else begin
+                end else begin
             NextTickCounter = TickCounter + 1;
+            NextState = DATA;
+          end
+          end else begin
+            NextState = DATA;
           end
         end
         STOP: begin
@@ -105,9 +112,12 @@ always_comb begin
             if (TickCounter == STOP_BIT_TICKS-1) begin
               NextState = IDLE;
               RxReady = 1'b1;
-            end 
-          end else begin
+            end  else begin
             NextTickCounter = TickCounter + 1;
+            NextState = STOP;
+          end
+          end else begin
+            NextState = STOP;
           end
         end
          default: begin
