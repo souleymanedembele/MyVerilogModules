@@ -5,6 +5,8 @@
  * Last Modified Date: 06.24.2023
  * Last Modified By  : Souleymane Dembele <sdembele@uw.edu>
  */
+`ifndef RECEIVER_H
+`define RECEIVER_H
 // this is the UART RX module
 module Receiver (
     Clock, // input clock signal (50MHz)
@@ -115,6 +117,7 @@ always_comb begin
 end
 assign RxData = DataBits;
 endmodule
+`endif
 
 module Receiver_tb;
 reg Clock, ResetN, Rx, Tick;

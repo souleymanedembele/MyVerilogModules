@@ -5,7 +5,8 @@
  * Last Modified Date: 06.24.2023
  * Last Modified By  : Souleymane Dembele <sdembele@uw.edu>
  */
-
+`ifndef TRANSMITTER_H
+`define TRANSMITTER_H
 module Transmitter (
     Clock,  // input clock signal (50MHz)
     ResetN,  // input reset signal (active low)
@@ -117,6 +118,7 @@ module Transmitter (
   assign Tx = CurrentTx;
 
 endmodule
+`endif
 
 module Transmitter_tb ();
   reg Clock, ResetN, Tick, TxStart;
