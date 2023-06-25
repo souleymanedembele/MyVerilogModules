@@ -32,7 +32,7 @@ module BaudRateGenerator (
       .ClearN(ClearN),
       .Q(Q)
   );
-  assign ClockTick = Q == BAUD_RATE_DIVISOR - 1 ? 1'b1 : 1'b0;
+  assign ClockTick = Q == (BAUD_RATE_DIVISOR - 1) ? 1'b1 : 1'b0;
 endmodule
 `endif
 

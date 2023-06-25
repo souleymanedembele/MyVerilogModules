@@ -42,7 +42,7 @@ module Fifo (
   // write enable logic
   assign writeEnable = Write & ~fullReg;
   // sequential logic
-  always_ff @(posedge Clock) begin
+  always_ff @(posedge Clock, negedge ResetN) begin
     if (!ResetN) begin
       readPtr  <= 0;
       writePtr <= 0;
