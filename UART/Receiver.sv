@@ -42,7 +42,7 @@ reg [7:0] DataBits, NextDataBits;
 // STOP: waiting for stop bit
 localparam IDLE = 2'b00, START = 2'b01, DATA = 2'b10, STOP = 2'b11;
 // always ff block
-always_ff @(posedge Clock, negedge ResetN)
+always_ff @(posedge Clock)
 begin
     if (!ResetN)
     begin

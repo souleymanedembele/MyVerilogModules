@@ -36,7 +36,7 @@ module Transmitter (
   reg CurrentTx, NextTx;
 
   // state machine
-  always_ff @(posedge Clock, negedge ResetN) begin
+  always_ff @(posedge Clock) begin
     if (!ResetN) begin
       CurrentState <= IDLE;
       TickCount <= 0;

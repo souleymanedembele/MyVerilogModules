@@ -147,7 +147,7 @@ module Fifo_tb;
     #20;
     WriteData = 8'h04;
     #20;
-    {Write, Read} = 2'b10;
+    {Write, Read} = 2'b11;
     #40;
     $stop;
   end

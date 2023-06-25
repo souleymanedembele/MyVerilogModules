@@ -20,7 +20,7 @@ module BaudRateGenerator (
   parameter CLOCK_RATE = 50000000;
   parameter SAMPLE_RATE = 16;
   // round up to the nearest integer
-  localparam BAUD_RATE_DIVISOR = CLOCK_RATE / (BAUD_RATE * SAMPLE_RATE) + 1;
+  localparam BAUD_RATE_DIVISOR = CLOCK_RATE / (BAUD_RATE * SAMPLE_RATE);
   localparam NUM_BITS = $clog2(BAUD_RATE_DIVISOR);
   wire [NUM_BITS-1:0] Q;
   // Instantiate the counter module
