@@ -156,30 +156,92 @@ module UART_tb ();
 
   initial begin
     ResetN = 1'b0;
-    Rx = 0;
-    WriteData = 8'hAA;
-    WriteUart = 1'b0;
     #20;
+    ResetN = 1'b1;
     WriteUart = 1'b0;
     ReadUart = 1'b0;
-    ResetN = 1'b1;
-    wait (DUT.ClockTick == 1);
-    wait (DUT.ClockTick == 0);
+    #20;
+    wait (TxFull == 0);
+    WriteData = 8'hAA;
     WriteUart = 1'b1;
     ReadUart  = 1'b0;
     wait (DUT.TxData == 8'hAA);
-    wait (Tx == 1);
-    wait (Tx == 0);
-    wait (Tx == 1);
-    wait (Tx == 0);
-    wait (Tx == 1);
-    wait (Tx == 0);
-    wait (Tx == 1);
-    wait (Tx == 0);
-    wait (DUT.TxReady == 1);
-    wait (DUT.TxReady == 0);
-    wait (DUT.TxReady == 1);
-    wait (DUT.TxReady == 0);
+    WriteUart = 1'b0;
+    ReadUart  = 1'b1;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 0);
+    WriteData = 8'hFF;
+    WriteUart = 1'b1;
+    ReadUart  = 1'b0;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 1);
+    WriteUart = 1'b0;
+    ReadUart  = 1'b1;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 0);
+
+    WriteData = 8'h00;
+    WriteUart = 1'b1;
+    ReadUart  = 1'b0;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 1);
+    WriteUart = 1'b0;
+    ReadUart  = 1'b1;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 0);
+
+    WriteData = 8'h55;
+    WriteUart = 1'b1;
+    ReadUart  = 1'b0;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 1);
+    WriteUart = 1'b0;
+    ReadUart  = 1'b1;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 0);
+
+    WriteData = 8'h2A;
+    WriteUart = 1'b1;
+    ReadUart  = 1'b0;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 1);
+    WriteUart = 1'b0;
+    ReadUart  = 1'b1;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 0);
+
+    WriteData = 8'h4A;
+    WriteUart = 1'b1;
+    ReadUart  = 1'b0;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 1);
+    WriteUart = 1'b0;
+    ReadUart  = 1'b1;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 0);
+
+    WriteData = 8'hBB;
+    WriteUart = 1'b1;
+    ReadUart  = 1'b0;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 1);
+    WriteUart = 1'b0;
+    ReadUart  = 1'b1;
+    // wait (DUT.TxReady == 1);
+    // wait (DUT.TxReady == 0);
+    wait (TxFull == 0);
     #200;
     $stop;
   end
@@ -187,8 +249,9 @@ module UART_tb ();
   initial begin
     $monitor(
         $time,,,,
-        "RxData=%b, RxReady=%b, TxData=%b, TxFifoNotEmpty=%b, WriteData=%b, ReadData=%b, Tx=%b, RxEmpty=%b",
-        DUT.RxData, DUT.RxReady, DUT.TxData, DUT.TxFifoNotEmpty, WriteData, ReadData, Tx, RxEmpty);
+        "TxFull=%b, TxReady=%b, RxData=%b, RxReady=%b, TxData=%b, TxFifoNotEmpty=%b, WriteData=%b, ReadData=%b, Tx=%b, RxEmpty=%b",
+        TxFull, DUT.TxReady, DUT.RxData, DUT.RxReady, DUT.TxData, DUT.TxFifoNotEmpty, WriteData,
+        ReadData, Tx, RxEmpty);
   end
 
 endmodule

@@ -23,7 +23,7 @@ module CounterModuloN (
   input Enable, Clock, ClearN;
   output reg [NUM_BITS-1:0] Q;
 
-  always @(posedge Clock, negedge ClearN) begin
+  always @(posedge Clock) begin
     if (!ClearN) begin
       Q  <= 0;
     end else if (Enable && Q < STOP_VALUE) begin

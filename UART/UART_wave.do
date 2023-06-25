@@ -12,7 +12,9 @@ add wave -noupdate /UART_tb/ReadData
 add wave -noupdate /UART_tb/TxFull
 add wave -noupdate /UART_tb/RxEmpty
 add wave -noupdate /UART_tb/DUT.RxReady
+add wave -noupdate /UART_tb/DUT.TxReady
 add wave -noupdate /UART_tb/DUT.RxData
+add wave -noupdate /UART_tb/DUT.TxData
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {0 ps} 0}
 quietly wave cursor active 0            

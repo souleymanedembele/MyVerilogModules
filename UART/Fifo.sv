@@ -42,7 +42,7 @@ module Fifo (
   // write enable logic
   assign writeEnable = Write & ~fullReg;
   // sequential logic
-  always_ff @(posedge Clock, negedge ResetN) begin
+  always_ff @(posedge Clock) begin
     if (!ResetN) begin
       readPtr  <= 0;
       writePtr <= 0;
@@ -69,7 +69,7 @@ module Fifo (
       Write, Read
     })
       READ: begin
-        if (!emptyReg) begin
+        if (~emptyReg) begin
           nextReadPtr = readPtrSuccess;
           nextFullReg = 0;
           if (readPtrSuccess == writePtr) begin
@@ -78,7 +78,7 @@ module Fifo (
         end
       end
       WRITE: begin
-        if (!fullReg) begin
+        if (~fullReg) begin
           nextWritePtr = writePtrSuccess;
           nextEmptyReg = 0;
           if (writePtrSuccess == readPtr) begin
@@ -141,9 +141,18 @@ module Fifo_tb;
     {Write, Read} = 2'b10;
     WriteData = 8'h01;
     #20;
+    {Write, Read} = 2'b01;
+    #20;
+    {Write, Read} = 2'b10;
     WriteData = 8'h02;
     #20;
+    {Write, Read} = 2'b01;
+    #20;
     WriteData = 8'h03;
+    #20;
+    {Write, Read} = 2'b10;
+    #20;
+    {Write, Read} = 2'b01;
     #20;
     WriteData = 8'h04;
     #20;
