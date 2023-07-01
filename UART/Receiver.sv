@@ -2,7 +2,7 @@
  * File              : Receiver.sv
  * Author            : Souleymane Dembele <sdembele@uw.edu>
  * Date              : 06.18.2023
- * Last Modified Date: 06.24.2023
+ * Last Modified Date: 06.30.2023
  * Last Modified By  : Souleymane Dembele <sdembele@uw.edu>
  */
 `ifndef RECEIVER_H
@@ -127,7 +127,6 @@ always_comb begin
 end
 assign RxData = DataBits;
 endmodule
-`endif
 
 module Receiver_tb;
 reg Clock, ResetN, Rx, Tick;
@@ -207,3 +206,4 @@ initial begin
 end
 
 endmodule
+`endif

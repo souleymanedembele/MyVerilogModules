@@ -2,7 +2,7 @@
  * File              : Fifo.sv
  * Author            : Souleymane Dembele <sdembele@uw.edu>
  * Date              : 06.24.2023
- * Last Modified Date: 06.24.2023
+ * Last Modified Date: 06.30.2023
  * Last Modified By  : Souleymane Dembele <sdembele@uw.edu>
  */
 `ifndef FIFO_H
@@ -101,7 +101,6 @@ module Fifo (
   assign Full  = fullReg;
   assign Empty = emptyReg;
 endmodule
-`endif
 
 module Fifo_tb;
   reg Clock, ResetN, Read, Write;
@@ -167,3 +166,4 @@ module Fifo_tb;
   end
 
 endmodule
+`endif

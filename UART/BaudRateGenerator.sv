@@ -2,7 +2,7 @@
  * File              : BaudRateGenerator.sv
  * Author            : Souleymane Dembele <sdembele@uw.edu>
  * Date              : 06.18.2023
- * Last Modified Date: 06.18.2023
+ * Last Modified Date: 06.30.2023
  * Last Modified By  : Souleymane Dembele <sdembele@uw.edu>
  */
 `ifndef BAUD_RATE_GENERATOR_H
@@ -34,7 +34,6 @@ module BaudRateGenerator (
   );
   assign ClockTick = Q == (BAUD_RATE_DIVISOR - 1) ? 1'b1 : 1'b0;
 endmodule
-`endif
 
 module BaudRateGenerator_tb ();
   reg Enable, Clock, ClearN;
@@ -76,3 +75,4 @@ module BaudRateGenerator_tb ();
     $monitor("ClockTick = %b, Q=%d", ClockTick, DUT.Q);
   end
 endmodule
+`endif

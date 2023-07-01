@@ -2,7 +2,7 @@
  * File              : CounterModuloN.sv
  * Author            : Souleymane Dembele <sdembele@uw.edu>
  * Date              : 06.18.2023
- * Last Modified Date: 06.18.2023
+ * Last Modified Date: 06.30.2023
  * Last Modified By  : Souleymane Dembele <sdembele@uw.edu>
  */
 // This module implements a counter modulo N
@@ -33,7 +33,6 @@ module CounterModuloN (
     end
   end
 endmodule
-`endif
 
 module CounterModuloN_tb;
   reg Enable, Clock, ClearN;
@@ -68,3 +67,4 @@ module CounterModuloN_tb;
 
   initial $monitor($time,,,,"Enable=%d, ClearN=%d, Q=%d", Enable, ClearN, Q);
 endmodule
+`endif

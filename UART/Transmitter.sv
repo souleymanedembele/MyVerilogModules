@@ -2,7 +2,7 @@
  * File              : Transmitter.sv
  * Author            : Souleymane Dembele <sdembele@uw.edu>
  * Date              : 06.24.2023
- * Last Modified Date: 06.24.2023
+ * Last Modified Date: 06.30.2023
  * Last Modified By  : Souleymane Dembele <sdembele@uw.edu>
  */
 `ifndef TRANSMITTER_H
@@ -127,7 +127,6 @@ module Transmitter (
   assign Tx = CurrentTx;
 
 endmodule
-`endif
 
 module Transmitter_tb ();
   reg Clock, ResetN, Tick, TxStart;
@@ -201,3 +200,4 @@ module Transmitter_tb ();
     $monitor("DataIn=%b, Tx=%b, TxReady=%b", DataIn, Tx, TxReady);
   end
 endmodule
+`endif

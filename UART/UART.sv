@@ -2,7 +2,7 @@
  * File              : UART.sv
  * Author            : Souleymane Dembele <sdembele@uw.edu>
  * Date              : 06.24.2023
- * Last Modified Date: 06.24.2023
+ * Last Modified Date: 06.30.2023
  * Last Modified By  : Souleymane Dembele <sdembele@uw.edu>
  */
 `ifndef UART_H
@@ -109,7 +109,6 @@ module UART (
 
   assign TxFifoNotEmpty = ~TxEmpty;
 endmodule
-`endif
 
 module UART_tb ();
   parameter DATA_BITS = 8;  // number of data bits
@@ -255,3 +254,4 @@ module UART_tb ();
   end
 
 endmodule
+`endif

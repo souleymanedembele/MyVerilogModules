@@ -2,7 +2,7 @@
  * File              : ReceiverInterface.sv
  * Author            : Souleymane Dembele <sdembele@uw.edu>
  * Date              : 06.24.2023
- * Last Modified Date: 06.24.2023
+ * Last Modified Date: 06.30.2023
  * Last Modified By  : Souleymane Dembele <sdembele@uw.edu>
  */
 `ifndef RECEIVER_INTERFACE_H
@@ -54,7 +54,6 @@ module ReceiverInterface (
   assign DataOut = CurrentBuffer;
   assign Flag = CurrentFlag;
 endmodule
-`endif
 
 module ReceiverInterface_tb;
   reg Clock, ResetN, SetFlag, ClearFlag;
@@ -102,3 +101,4 @@ module ReceiverInterface_tb;
     $monitor("DataOut = %h, Flag = %b", DataOut, Flag);
   end
 endmodule
+`endif
